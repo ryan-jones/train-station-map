@@ -31,10 +31,9 @@ export default function Map() {
 
 	const buildInfoWindowContent = (station: IStation) => {
 		const offeredIcons = setIcons(station)
-			.map(
-				(icon: string, i: number) =>
-					`<img key={${i}-${Math.random()}} src="${icons[icon]}" alt="icon" />`
-			)
+			.map((icon: string, i: number) => {
+				return `<img key={${i}-${icon}} src="${icons[icon]}" alt="icon" />`;
+			})
 			.join("");
 		return `
 		<div class="info-window">

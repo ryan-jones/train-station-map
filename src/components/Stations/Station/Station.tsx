@@ -1,17 +1,11 @@
 import React from "react";
-import "./Station.scss";
 import useStore from "../../../hooks/useStore";
 import { SELECT_STATION } from "../../../store";
 import Icons from "../Icons/Icons";
+import { IStation } from "../../StationsView";
+import "./Station.scss";
 
-interface IStation {
-	name: string;
-	address: string;
-	email: string;
-	service: any;
-}
-
-export default function Station(station: any) {
+export default function Station(station: IStation) {
 	const { dispatch } = useStore();
 
 	const selectStation = () => {

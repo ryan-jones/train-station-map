@@ -2,11 +2,11 @@ import React, { useEffect, useState, useReducer } from "react";
 import Map from "./Map/Map";
 import Stations from "./Stations/Stations";
 import Loading from "./Loading";
-import "./StationsView.scss";
 import { DEFAULT_REDUCER, INITIAL_STATE, STATIONS_LOADED } from "../store";
-import { setUrl, formatStations, fetchStations } from "../utils";
+import { formatStations, fetchStations } from "../utils";
 import StoreContext from "../contexts/store";
 import logo from "../assets/logo_cff@2x.png";
+import "./StationsView.scss";
 
 export interface IStation {
 	coordinates: {

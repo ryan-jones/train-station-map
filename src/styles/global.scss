@@ -1,1 +1,10 @@
 @import "./variables.scss";
+
+@mixin w-h($width, $height: null) {
+	width: $width;
+	@if ($height) {
+		height: $height;
+	} @else {
+		height: $width;
+	}
+}
