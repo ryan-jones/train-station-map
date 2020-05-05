@@ -1,0 +1,27 @@
+@import "../../../../styles/global.scss";
+
+.text {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	&__title {
+		text-transform: uppercase;
+		margin: 15px auto;
+		text-align: center;
+		font-family: $title-text;
+		font-size: 64px;
+		width: 55%;
+		margin-bottom: 36px;
+	}
+	&__sub-title {
+		font-family: $subtitle-text;
+		font-size: 20px;
+		text-transform: uppercase;
+		margin-bottom: 30px;
+		width: 65%;
+
+		text-align: center;
+	}
+}

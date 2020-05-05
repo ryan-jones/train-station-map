@@ -1,0 +1,27 @@
+#map {
+	height: 440px;
+	width: 100%;
+	background-color: lightgray;
+}
+
+.info-window {
+	width: 300px;
+
+	&-location {
+		p {
+			margin: 15px 0 0;
+		}
+	}
+	&-details {
+		margin-top: 50px;
+
+		p {
+			margin: 10px 0;
+		}
+
+		img {
+			height: 34px;
+			width: 34px;
+		}
+	}
+}
