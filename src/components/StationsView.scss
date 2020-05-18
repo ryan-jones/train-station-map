@@ -1,7 +1,7 @@
 @import "../styles/global.scss";
 
 .container {
-	@include w-h(100%);
+	@include w-h(calc(100% - 100px), 100%);
 	position: relative;
 	z-index: 100;
 	background-color: $white;
@@ -11,26 +11,10 @@
 	right: 0;
 	top: -250px;
 	bottom: 0;
-	padding: 50px;
-}
-
-.map-container {
-	width: 100%;
+	padding: 50px auto;
 }
 
 .loading-container {
 	@include w-h(100%, 440px);
 	background-color: lightgray;
-}
-
-.credit {
-	display: flex;
-	width: 100%;
-	justify-content: flex-end;
-	margin-top: 15px;
-
-	p {
-		margin: 5px 15px 0 0;
-		color: $text-dark;
-	}
 }

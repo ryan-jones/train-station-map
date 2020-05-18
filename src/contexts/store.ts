@@ -6,7 +6,10 @@ interface IStore {
 }
 
 const StoreContext = createContext<IStore>({
-	state: null,
+	state: {
+		stations: [],
+		selectedStation: {},
+	},
 	dispatch: null,
 });
 

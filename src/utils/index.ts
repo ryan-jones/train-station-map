@@ -13,16 +13,26 @@ export const fetchStations = (startAt: number): Promise<any> => {
 };
 
 export const formatStations = (records: any[]) => {
-	return records.map(({ fields }: any) => ({
-		coordinates: {
-			lng: fields.geopos[1],
-			lat: fields.geopos[0],
-		},
-		name: fields.stationsbezeichnung,
-		address: `${fields.adresse}, ${fields.plz} ${fields.ort}`,
-		email: fields.mail,
-		service: fields.service,
-	}));
+	return records.reduce((filteredRecords, { fields }) => {
+		const existentRecord = filteredRecords.find(
+			(fr: any) => fr.name === fields.stationsbezeichnung
+		);
+		if (existentRecord) {
+			const index = filteredRecords.indexOf(existentRecord);
+			filteredRecords[index].service += `,${fields.service}`;
+			return filteredRecords;
+		}
+		return filteredRecords.concat({
+			coordinates: {
+				lng: fields.geopos[1],
+				lat: fields.geopos[0],
+			},
+			name: fields.stationsbezeichnung,
+			address: `${fields.adresse}, ${fields.plz} ${fields.ort}`,
+			email: fields.mail,
+			service: fields.service,
+		});
+	}, []);
 };
 
 const selectIcon = (service: string): string => {
@@ -41,6 +51,22 @@ const selectIcon = (service: string): string => {
 	}
 };
 
+const iconAlreadyDisplayed = (services: string[], current: string) => {
+	switch (current) {
+		case "gepäck":
+		case "gepäckausgabe":
+		case "gepäckaufbewahrung":
+			return services.includes("luggageIcon");
+		case "businesstravel-service-center":
+			return services.includes("loungeIcon");
+		case "geldwechsel":
+		case "western union":
+			return services.includes("moneyExchangeIcon");
+		default:
+			return true;
+	}
+};
+
 const acceptedValues: string[] = [
 	"gepäck",
 	"gepäckausgabe",
@@ -55,8 +81,9 @@ export const setIcons = (station: IStation): string[] => {
 		...station.service.toLowerCase().split(","),
 	];
 	return providedServices.reduce((services: string[], current: string) => {
-		return acceptedValues.includes(current)
-			? services.concat(selectIcon(current))
+		return acceptedValues.includes(current) &&
+			!iconAlreadyDisplayed(services, current)
+			? services.concat(selectIcon(current.trim()))
 			: services;
 	}, []);
 };

@@ -4,8 +4,8 @@ import useStore from "../../hooks/useStore";
 import { formatStations, fetchStations } from "../../utils";
 import { LOAD_MORE_STATIONS } from "../../store";
 import Loading from "../Loading";
-import "./Stations.scss";
 import { IStation } from "../StationsView";
+import "./Stations.scss";
 
 let observer: any;
 let loadOn: any;
@@ -15,18 +15,19 @@ export default function Stations() {
 	const stationQty = state.stations.length;
 
 	useEffect(() => {
-		const onIntersection = (entries: any) => {
+		const onIntersection = async (entries: any) => {
 			if (entries[0].isIntersecting) {
-				fetchStations(state.stations.length)
-					.then(({ records }) => {
-						const stations = formatStations(records);
-						dispatch({
-							type: LOAD_MORE_STATIONS,
-							payload: stations,
-						});
-						observer.unobserve(loadOn);
-					})
-					.catch((err) => console.error(err));
+				try {
+					const { records } = await fetchStations(stationQty);
+					const stations = formatStations(records);
+					dispatch({
+						type: LOAD_MORE_STATIONS,
+						payload: stations,
+					});
+					observer.unobserve(loadOn);
+				} catch (err) {
+					console.log(err);
+				}
 			}
 		};
 		if (stationQty > 0) {
@@ -38,7 +39,7 @@ export default function Stations() {
 			});
 			observer.observe(loadOn);
 		}
-	}, [dispatch, state.stations.length, stationQty]);
+	}, [dispatch, stationQty]);
 
 	return (
 		<div className="stations-container">
