@@ -19,7 +19,7 @@ export default function Icons({ station }: Icons) {
 	return (
 		<div className="icons">
 			{setIcons(station).map((icon: string, i: number) => (
-				<img key={`${i}-${icon}`} src={icons[icon]} alt="icon" />
+				<img key={`${i}-${icon}`} src={icons[icon]} alt={`icon-${icon}`} />
 			))}
 		</div>
 	);

@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import Station from "./Station/Station";
 import useStore from "../../hooks/useStore";
-import { formatStations, fetchStations } from "../../utils";
+import { formatStations } from "../../utils";
 import { LOAD_MORE_STATIONS } from "../../store";
 import Loading from "../Loading";
 import { IStation } from "../StationsView";
+import { fetchStations } from "../../utils/http";
 import "./Stations.scss";
 
 let observer: any;
