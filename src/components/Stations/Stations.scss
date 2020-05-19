@@ -1,7 +1,0 @@
-@import "../../styles/global.scss";
-
-.stations-container {
-	@include w-h(100%, 80vh);
-	overflow-y: scroll;
-	margin: 0;
-}

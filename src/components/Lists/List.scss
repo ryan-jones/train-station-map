@@ -1,0 +1,21 @@
+@import "../../styles/global.scss";
+
+.list {
+	width: 50%;
+	overflow-y: scroll;
+	border-right: $list-border;
+
+	@media only screen and (max-width: 767px) {
+		width: 100%;
+		height: calc(100vh - 300px);
+	}
+}
+
+.error {
+	@include w-h(100%);
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	justify-content: center;
+	word-wrap: break-word;
+}

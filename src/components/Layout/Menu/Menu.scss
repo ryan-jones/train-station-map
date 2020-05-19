@@ -1,0 +1,15 @@
+@import "../../../styles/global.scss";
+.menu {
+	@include w-h(100%, 50px);
+	position: absolute;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	z-index: 100;
+	background-color: $white;
+}
+a {
+	text-decoration: none;
+	font-family: $title-text;
+	color: black;
+}

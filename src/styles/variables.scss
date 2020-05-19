@@ -13,3 +13,10 @@ $dark-red: #981c18;
 $title-text: "Raleway Black", Helvetica, sans-serif;
 $subtitle-text: "Raleway Extrabold", helvetica, sans-serif;
 $sm-text: "Raleway Medium", Helvetica, sans-serif;
+
+$list-border: 1px solid gray;
+$item-border: 1px solid black;
+$selected-item: lighten(
+	$color: gray,
+	$amount: 40,
+);

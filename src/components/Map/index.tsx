@@ -1,14 +1,21 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
-import { IStation } from "../StationsView";
+import {
+	Map,
+	GoogleApiWrapper,
+	Marker,
+	InfoWindow,
+	Polyline,
+} from "google-maps-react";
 import useMapProps from "../../hooks/useMapProps";
 import InfoWindowContent from "./InfoWindowContent";
 import { IMarker } from "../../interfaces";
-import logo from "../../assets/logo_cff@2x.png";
+import { setStatusIndicator } from "../../utils";
+import { fetchStopData } from "../../utils/http";
+import { formatMarkerProps } from "../../utils/formatters";
 import "./Map.scss";
 
 interface IMarkerProps {
-	station: IStation | null;
+	content: any;
 	marker: any;
 }
 
@@ -18,13 +25,13 @@ interface Props {
 }
 
 const MapContainer = (props: Props) => {
-	const { markers, selectedStation } = useMapProps();
+	const { markers, polylineCoords, selectedValue } = useMapProps();
 	const [mapReady, setMapReady] = useState(false);
+	const [showInfoWindow, setShowInfoWindow] = useState(false);
 	const [infoMarker, setInfoMarker] = useState<IMarkerProps>({
-		station: null,
+		content: null,
 		marker: null,
 	});
-	const [showInfoWindow, setShowInfoWindow] = useState(false);
 	const mapRef = useRef<any>({});
 	const markerRef = useRef<any>(null);
 
@@ -35,53 +42,64 @@ const MapContainer = (props: Props) => {
 			width: "100%",
 			height: "100%",
 		},
-		initialCenter: selectedStation.coordinates,
+		initialCenter: selectedValue.origin.coordinates,
+		center: selectedValue.origin.coordinates,
+		containerStyle: {
+			width: "inherit",
+			position: "relative",
+		},
 	};
 
-	const onClickMarker = (props: any, marker: any) => {
-		setInfoMarker({ station: props, marker });
+	const onClickMarker = async (props: any, marker: any) => {
+		const result = props.id ? await fetchStopData(props.id) : props;
+		const formattedMarker = formatMarkerProps(result);
+		setInfoMarker({ content: formattedMarker, marker });
 		setShowInfoWindow(true);
 	};
 
 	useEffect(() => {
 		if (markerRef.current && mapReady) {
 			setInfoMarker({
-				station: selectedStation,
+				content: formatMarkerProps(selectedValue),
 				marker: markerRef.current.marker,
 			});
 			setShowInfoWindow(true);
 		}
-	}, [mapReady, selectedStation]);
+	}, [mapReady, selectedValue]);
 
 	return (
-		<div className="map">
+		<div className="map-container">
 			{props.loaded && (
 				<Map ref={mapRef} {...defaultProps} onReady={() => setMapReady(true)}>
 					{mapReady &&
 						markers.length > 0 &&
 						markers.map((marker: IMarker) => (
 							<Marker
-								ref={marker.name === selectedStation.name ? markerRef : null}
+								ref={marker.name === selectedValue.name ? markerRef : null}
 								{...marker}
 								onClick={onClickMarker}
 							/>
 						))}
-					{mapReady && infoMarker.station && (
+					{mapReady && polylineCoords.length > 0 && (
+						<Polyline
+							path={polylineCoords}
+							strokeColor={setStatusIndicator(selectedValue.status)}
+							strokeOpacity={0.8}
+							strokeWeight={4}
+						/>
+					)}
+					{mapReady && infoMarker.content && (
 						<InfoWindow
 							marker={infoMarker.marker}
 							visible={showInfoWindow}
 							google={props.google}
 							map={mapRef.current}
 						>
-							<InfoWindowContent station={infoMarker.station} />
+							<InfoWindowContent content={infoMarker.content} />
 						</InfoWindow>
 					)}
 				</Map>
 			)}
-			<div className="credit">
-				<p>Based on data from</p>
-				<img src={logo} alt="credit" />
-			</div>
 		</div>
 	);
 };

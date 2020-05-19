@@ -1,11 +1,15 @@
 import React, { useReducer } from "react";
 import { render, act } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
-import { DEFAULT_REDUCER, INITIAL_STATE, STATIONS_LOADED } from "../store";
-import StoreContext from "../contexts/store";
-import StationsView from "./StationsView";
-import { formatStations } from "../utils";
-import { fetchStations } from "../utils/http";
+import {
+	DEFAULT_REDUCER,
+	INITIAL_STATE,
+	TRAIN_STATIONS_LOADED,
+} from "../../store";
+import StoreContext from "../../contexts/store";
+import Trains from ".";
+import { formatTrainStations } from "../../utils/formatters";
+import { fetchStations } from "../../utils/http";
 
 const records = [
 	{
@@ -35,7 +39,7 @@ window.IntersectionObserver = jest.fn(() => ({
 	takeRecords: () => [],
 }));
 
-describe("StationsViewComponent", () => {
+describe("TrainsComponent", () => {
 	it("loads the component without crashing", async () => {
 		const { result } = renderHook(() =>
 			useReducer(DEFAULT_REDUCER, INITIAL_STATE)
@@ -45,22 +49,41 @@ describe("StationsViewComponent", () => {
 
 		const { queryByText } = render(
 			<StoreContext.Provider value={{ state, dispatch }}>
-				<StationsView />
+				<Trains />
 			</StoreContext.Provider>
 		);
 		expect(queryByText("123 Main St")).toBeNull();
 
 		await act(() =>
 			result.current[1]({
-				type: STATIONS_LOADED,
-				payload: formatStations(records),
+				type: TRAIN_STATIONS_LOADED,
+				payload: formatTrainStations(records),
 			})
 		);
 		expect(fetchStations).toHaveBeenCalledTimes(1);
 		expect(fetchStations).toHaveBeenCalledWith(0);
 		expect(result.current[0]).toEqual({
-			stations: formatStations(records),
-			selectedStation: formatStations(records)[0],
+			trains: {
+				error: false,
+				stations: formatTrainStations(records),
+				selectedStation: formatTrainStations(records)[0],
+			},
+			buses: {
+				error: false,
+				routes: [],
+				currentRoute: {
+					name: "",
+					origin: {
+						address: "",
+						coordinates: {
+							lat: 0,
+							lng: 0,
+						},
+					},
+					stops: [],
+					status: "",
+				},
+			},
 		});
 	});
 });

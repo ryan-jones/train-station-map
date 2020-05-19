@@ -1,0 +1,77 @@
+@import "../../../../styles/global.scss";
+
+.item {
+	@include w-h(100%, 100px);
+	border-bottom: $item-border;
+	&-selected {
+		@include w-h(100%, 100px);
+		background-color: $selected-item;
+		border-bottom: $item-border;
+	}
+}
+.name {
+	@include flex-between();
+	@include w-h(auto, 50px);
+	padding: 0 15px;
+
+	@media only screen and (min-width: 769px) and (max-width: 1100px) {
+		flex-direction: column;
+	}
+
+	&__header {
+		@include flex-end();
+		height: 100%;
+
+		h2 {
+			margin: 0;
+			width: 100%;
+
+			@media only screen and (max-width: 767px) {
+				font-size: 15px;
+				word-wrap: break-word;
+				width: auto;
+			}
+		}
+	}
+	&__status {
+		@include flex-end();
+		height: 100%;
+
+		p {
+			font-weight: bold;
+			margin: 0;
+
+			@media only screen and (max-width: 767px) {
+				font-size: 12px;
+				word-wrap: break-word;
+			}
+		}
+	}
+}
+
+.details {
+	max-width: 100%;
+	padding: 0 15px;
+
+	@media only screen and (max-width: 767px) {
+		padding: 0;
+	}
+
+	&__route {
+		@include flex-between();
+		align-items: center;
+		font-size: 10px;
+
+		@media only screen and (max-width: 767px) {
+			padding: 15px 15px 0;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+
+			p {
+				margin: 0;
+				width: 100%;
+			}
+		}
+	}
+}

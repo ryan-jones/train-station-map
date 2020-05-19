@@ -1,25 +1,15 @@
 @import "../../styles/global.scss";
 
-.map {
-	@include w-h(100%, 440px);
-	max-width: 100%;
-	max-height: 440px;
-	background-color: lightgray;
-	div {
-		&:first-of-type {
-			height: inherit !important;
-		}
+.map-container {
+	@include w-h(100%);
+
+	@media only screen and (max-width: 767px) {
+		height: 300px;
+		max-height: 300px;
+		width: 100%;
 	}
-}
 
-.credit {
-	display: flex;
-	width: 100%;
-	justify-content: flex-end;
-	margin-top: 15px;
-
-	p {
-		margin: 5px 15px 0 0;
-		color: $text-dark;
+	@media only screen and (min-width: 768px) {
+		min-height: 100vh;
 	}
 }

@@ -1,17 +1,25 @@
 import React from "react";
 import Image from "../../../assets/vue-background.png";
-import TextOverlay from "./TextOverlay/TextOverlay";
-import Text from "./Text/Text";
 import "./Header.scss";
+import Menu from "../Menu";
 
-export default function Header() {
+interface Props {
+	title: string;
+	subtitle: string;
+}
+
+export default function Header(props: Props) {
 	return (
 		<header className="header">
+			<Menu />
 			<div className="header__banner">
 				<img className="header__img" src={Image} alt="header" />
-				<TextOverlay>
-					<Text />
-				</TextOverlay>
+				<div className="overlay">
+					<div className="text">
+						<h1 className="text__title">{props.title}</h1>
+						<h3 className="text__sub-title">{props.subtitle}</h3>
+					</div>
+				</div>
 			</div>
 		</header>
 	);

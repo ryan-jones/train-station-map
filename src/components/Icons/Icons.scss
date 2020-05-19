@@ -1,7 +1,8 @@
-@import "../../../styles/global.scss";
+@import "../../styles/global.scss";
 
 .icons {
 	display: flex;
+	justify-content: space-between;
 	height: 50px;
 
 	img {
