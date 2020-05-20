@@ -1,8 +1,9 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, Suspense } from "react";
 import PageContext from "../../../contexts/page";
-import Layout from "../Layout";
-import Map from "../../Map";
+import Loading from "../../Loading";
 import "./PageLayout.scss";
+
+const Map = React.lazy(() => import("../../Map"));
 
 interface Props {
 	page: string;
@@ -14,16 +15,16 @@ interface Props {
 export default function PageLayout(props: Props) {
 	return (
 		<PageContext.Provider value={props.page}>
-			<Layout title={props.title} subtitle={props.subtitle}>
-				<div className="page-container">
-					{props.children}
-					{props.mapReady && (
+			<div className="page-container">
+				{props.children}
+				{props.mapReady && (
+					<Suspense fallback={<Loading text="map" />}>
 						<div className="map-wrapper">
 							<Map />
 						</div>
-					)}
-				</div>
-			</Layout>
+					</Suspense>
+				)}
+			</div>
 		</PageContext.Provider>
 	);
 }

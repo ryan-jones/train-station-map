@@ -6,6 +6,7 @@ import TrainList from "../../components/Lists/TrainList";
 import { formatTrainStations } from "../../utils/formatters";
 import { IListValue } from "../../interfaces";
 import PageLayout from "../../components/Layout/PageLayout";
+import Layout from "../../components/Layout/Layout";
 
 const title = "Looking for a train in Switzerland?";
 const subtitle =
@@ -26,16 +27,18 @@ export default function TrainsPage() {
 	}, [dispatch]);
 
 	return (
-		<PageLayout
-			page="trains"
-			title={title}
-			subtitle={subtitle}
-			mapReady={Boolean(state.trains.selectedStation.name)}
-		>
-			<TrainList
-				stations={state.trains.stations}
-				listError={state.trains.error}
-			/>
-		</PageLayout>
+		<Layout title={title} subtitle={subtitle}>
+			<PageLayout
+				page="trains"
+				title={title}
+				subtitle={subtitle}
+				mapReady={Boolean(state.trains.selectedStation.name)}
+			>
+				<TrainList
+					stations={state.trains.stations}
+					listError={state.trains.error}
+				/>
+			</PageLayout>
+		</Layout>
 	);
 }

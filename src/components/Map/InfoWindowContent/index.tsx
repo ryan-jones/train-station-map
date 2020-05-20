@@ -14,13 +14,12 @@ const icons: any = {
 	moneyExchangeIcon,
 };
 
-export default function InfoWindowContent({ content }: Props) {
-	console.log("infoWindowContent", content);
-	const setTime = (time: string): string => {
-		const date = new Date(time);
-		return `${date.getHours()}:${date.getMinutes()}`;
-	};
+const setTime = (time: string): string => {
+	const date = new Date(time);
+	return `${date.getHours()}:${date.getMinutes()}`;
+};
 
+export default function InfoWindowContent({ content }: Props) {
 	return (
 		<div className="info-window" style={{ width: "300px", height: "300px" }}>
 			<div className="info-window-location">

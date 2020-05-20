@@ -2,6 +2,7 @@ import React from "react";
 import BusListItem from "./BusListItem";
 import { IListValue } from "../../../interfaces";
 import List from "../index";
+import Loading from "../../Loading";
 
 interface Props {
 	routes: IListValue[];
@@ -11,10 +12,13 @@ interface Props {
 export default function BusList({ routes, listError }: Props) {
 	return (
 		<List listError={listError}>
-			{routes.length > 0 &&
+			{routes.length > 0 ? (
 				routes.map((route: IListValue) => (
 					<BusListItem key={route.name} result={route} />
-				))}
+				))
+			) : (
+				<Loading text="buses" />
+			)}
 		</List>
 	);
 }

@@ -6,6 +6,7 @@ import { LOAD_MORE_TRAIN_STATIONS, SELECT_TRAIN_STATION } from "../../../store";
 import TrainListItem from "./TrainListItem";
 import { IListValue } from "../../../interfaces";
 import List from "../index";
+import Loading from "../../Loading";
 
 interface Props {
 	stations: IListValue[];
@@ -46,7 +47,7 @@ export default function TrainList({ stations, listError }: Props) {
 	}, [dispatch, stationQty]);
 	return (
 		<List listError={listError}>
-			{stations.length > 0 &&
+			{stations.length > 0 ? (
 				stations.map((station: IListValue, i: number) => (
 					<TrainListItem
 						key={`${station.name}-${i}`}
@@ -55,7 +56,10 @@ export default function TrainList({ stations, listError }: Props) {
 							dispatch({ type: SELECT_TRAIN_STATION, payload: station })
 						}
 					/>
-				))}
+				))
+			) : (
+				<Loading text="trains" />
+			)}
 		</List>
 	);
 }

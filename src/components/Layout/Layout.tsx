@@ -5,7 +5,7 @@ import Footer from "./Footer";
 
 interface Props {
 	title: string;
-	subtitle: string;
+	subtitle?: string;
 	children?: ReactNode;
 	isNotFound?: boolean;
 }
