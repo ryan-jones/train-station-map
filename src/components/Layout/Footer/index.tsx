@@ -1,6 +1,11 @@
 import React from "react";
 import "./Footer.scss";
 
-export default function Footer() {
-	return <div className="footer">The footer</div>;
+interface Props {
+	isNotFound?: boolean;
+}
+
+export default function Footer({ isNotFound }: Props) {
+	const style = isNotFound ? "footer-extended" : "footer";
+	return <div className={style}>The footer</div>;
 }

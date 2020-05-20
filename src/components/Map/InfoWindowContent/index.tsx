@@ -15,21 +15,40 @@ const icons: any = {
 };
 
 export default function InfoWindowContent({ content }: Props) {
+	console.log("infoWindowContent", content);
 	const setTime = (time: string): string => {
 		const date = new Date(time);
 		return `${date.getHours()}:${date.getMinutes()}`;
 	};
 
 	return (
-		<div className="info-window">
+		<div className="info-window" style={{ width: "300px", height: "300px" }}>
 			<div className="info-window-location">
-				<h2>{content.name}</h2>
-				<p>{content.address}</p>
-				<div className="info-window-details">
-					{content.service &&
-						setIcons(content).map((icon: string, i: number) => (
-							<img key={`${i}-${icon}`} src={icons[icon]} alt="icon" />
-						))}
+				<p
+					style={{ fontSize: "24px", textAlign: "center", fontWeight: "bold" }}
+				>
+					{content.name || content.address}
+				</p>
+				<div
+					className="info-window-details"
+					style={{
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "space-evenly",
+						height: "100%",
+					}}
+				>
+					<div style={{ display: "flex" }}>
+						{content.service &&
+							setIcons(content.service).map((icon: string, i: number) => (
+								<img
+									key={`${i}-${icon}`}
+									src={icons[icon]}
+									alt="icon"
+									style={{ margin: "15px" }}
+								/>
+							))}
+					</div>
 					{content.email && <p>{content.email}</p>}
 					{content.stopTime && <p>Stop Time: {setTime(content.stopTime)}</p>}
 					{content.price && <p>Ticket price: {content.price}</p>}

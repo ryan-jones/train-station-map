@@ -44,7 +44,7 @@ export default function useMapProps() {
 			(mapProps: Props, current: any) => {
 				if (current.coordinates.lng && current.coordinates.lat) {
 					mapProps.markers.push({
-						title: current.name || current.address,
+						name: current.name || current.address,
 						id: current.id,
 						position: current.coordinates,
 						key: `${current.coordinates.lat}-${current.coordinates.lng}`,

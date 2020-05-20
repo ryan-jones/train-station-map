@@ -59,6 +59,7 @@ const MapContainer = (props: Props) => {
 
 	useEffect(() => {
 		if (markerRef.current && mapReady) {
+			console.log("or are we in here", selectedValue, markerRef);
 			setInfoMarker({
 				content: formatMarkerProps(selectedValue),
 				marker: markerRef.current.marker,

@@ -67,12 +67,23 @@ export const formatBusRoutes = (routes: any[]): IListValue[] => {
 	}));
 };
 
+// Can either be an unformatted train station on render, a formatted marker, or an
+// unformatted bus stop from http call
 export const formatMarkerProps = (result: any) => {
+	let position = {};
+	if (result.point) {
+		position = {
+			lat: result.point._latitude,
+			lng: result.point._longitude,
+		};
+	} else if (result.origin) {
+		position = result.origin.coordinates;
+	} else {
+		position = result.position;
+	}
 	return {
+		position,
 		address: result.address,
-		position: result.position
-			? result.position
-			: { lat: result.point._latitude, lng: result.point._longitude },
 		stopTime: result.stopTime,
 		price: result.price,
 		id: result.id,

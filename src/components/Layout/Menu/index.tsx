@@ -5,8 +5,8 @@ export default function Menu() {
 	return (
 		<nav className="menu">
 			<Link to="/">Home</Link>
-			<Link to="/trains">Trains</Link>
-			<Link to="/buses">Buses</Link>
+			<Link to="/trains">Explore Trains</Link>
+			<Link to="/buses">Explore Buses</Link>
 		</nav>
 	);
 }

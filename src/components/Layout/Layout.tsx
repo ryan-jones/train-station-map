@@ -4,17 +4,18 @@ import Body from "./Body/Body";
 import Footer from "./Footer";
 
 interface Props {
-	children: ReactNode;
 	title: string;
 	subtitle: string;
+	children?: ReactNode;
+	isNotFound?: boolean;
 }
 
 export default function (props: Props) {
 	return (
 		<>
 			<Header title={props.title} subtitle={props.subtitle} />
-			<Body>{props.children}</Body>
-			<Footer />
+			{props.children && <Body>{props.children}</Body>}
+			<Footer isNotFound={props.isNotFound} />
 		</>
 	);
 }

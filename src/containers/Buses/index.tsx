@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
-import Layout from "../../components/Layout/Layout";
 import BusList from "../../components/Lists/BusList";
-import Map from "../../components/Map";
 import { fetchBusRoutes } from "../../utils/http";
 import useStore from "../../hooks/useStore";
 import { BUS_ROUTES_LOADED, BUS_ROUTES_LOAD_ERROR } from "../../store";
-import PageContext from "../../contexts/page";
-import "./Buses.scss";
+import PageLayout from "../../components/Layout/PageLayout";
 
-const title = "Explore Bus Routes in Barcelona";
-const subtitle = "placeholder for buses";
+const title = "Looking for a bus in Catalonia?";
+const subtitle = "Explore The Dense Network Of Bus Stations around Barcelons! ";
 
 export default function BusesPage() {
 	const { state, dispatch } = useStore();
@@ -24,17 +21,13 @@ export default function BusesPage() {
 			.catch((err) => dispatch({ type: BUS_ROUTES_LOAD_ERROR }));
 	}, [dispatch]);
 	return (
-		<PageContext.Provider value="buses">
-			<Layout title={title} subtitle={subtitle}>
-				<div className="container">
-					<BusList routes={state.buses.routes} listError={state.buses.error} />
-					{state.buses.currentRoute.name && (
-						<div className="map-wrapper">
-							<Map />
-						</div>
-					)}
-				</div>
-			</Layout>
-		</PageContext.Provider>
+		<PageLayout
+			page="buses"
+			title={title}
+			subtitle={subtitle}
+			mapReady={Boolean(state.buses.currentRoute.name)}
+		>
+			<BusList routes={state.buses.routes} listError={state.buses.error} />
+		</PageLayout>
 	);
 }
