@@ -9,10 +9,12 @@ import { Paper } from "@material-ui/core";
 import TrainIcon from "@material-ui/icons/Train";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import useText from "../../../hooks/useText";
 
 export default function Dropdown() {
 	const [open, setOpen] = useState(false);
 	const anchorRef = useRef(null);
+	const text = useText();
 
 	const handleToggle = () => {
 		setOpen((prevOpen) => !prevOpen);
@@ -40,7 +42,7 @@ export default function Dropdown() {
 				color="inherit"
 				startIcon={<TrainIcon />}
 			>
-				Maps examples
+				{text.menu.maps.title}
 			</Button>
 			<Popper
 				open={open}
@@ -71,7 +73,7 @@ export default function Dropdown() {
 											component={Link}
 											to="/maps/trains"
 										>
-											Explore Trains
+											{text.menu.maps.trains}
 										</Button>
 									</MenuItem>
 									<MenuItem>
@@ -81,7 +83,7 @@ export default function Dropdown() {
 											component={Link}
 											to="/maps/buses"
 										>
-											Explore Buses
+											{text.menu.maps.buses}
 										</Button>
 									</MenuItem>
 								</MenuList>

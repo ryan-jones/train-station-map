@@ -7,10 +7,12 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { useDispatch } from "react-redux";
 import Dropdown from "./Dropdown";
 import { toggleNavDrawer } from "../../../store/actions/drawer";
+import useText from "../../../hooks/useText";
 import "./Menu.scss";
 
 export default function Menu() {
 	const dispatch = useDispatch();
+	const text = useText();
 	return (
 		<nav className="menu">
 			<IconButton color="inherit" onClick={() => dispatch(toggleNavDrawer())}>
@@ -23,7 +25,7 @@ export default function Menu() {
 					component={Link}
 					to="/"
 				>
-					Home
+					{text.menu.home}
 				</Button>
 				<Dropdown />
 			</div>

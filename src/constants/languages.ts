@@ -1,5 +1,13 @@
 export const TEXT: any = {
 	en: {
+		menu: {
+			home: "Home",
+			maps: {
+				title: "Maps Examples",
+				trains: "Explore Trains",
+				buses: "Explore Buses",
+			},
+		},
 		homePage: {
 			title: "Welcome to the app!",
 			bodyMain: "This app is intended to showcase multiple React features",
@@ -22,6 +30,14 @@ export const TEXT: any = {
 		},
 	},
 	es: {
+		menu: {
+			home: "Home",
+			maps: {
+				title: "Ejemplos del Mapas",
+				trains: "Explore Trens",
+				buses: "Explore Autobuses",
+			},
+		},
 		homePage: {
 			title: "Bienvenida a la applicación!",
 			bodyMain:
@@ -46,8 +62,16 @@ export const TEXT: any = {
 		},
 	},
 	zh: {
+		menu: {
+			home: "家",
+			maps: {
+				title: "地圖的例子",
+				trains: "尋找火車",
+				buses: "尋找大吧",
+			},
+		},
 		homePage: {
-			title: "Welcome to the app in Chinese!",
+			title: "歡迎這個 APP！",
 			bodyMain: "This app isn't intended to make sense",
 			bodyParagraph1:
 				"After completing multiple exercises testing the same concepts, it just made sense to merge them into a larger example app.",
