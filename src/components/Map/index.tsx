@@ -12,8 +12,8 @@ import { IMarker } from "../../interfaces";
 import { setStatusIndicator } from "../../utils";
 import { fetchStopData } from "../../utils/http";
 import { formatMarkerProps } from "../../utils/formatters";
-import "./Map.scss";
 import Loading from "../Loading";
+import "./Map.scss";
 
 interface IMarkerProps {
 	content: any;

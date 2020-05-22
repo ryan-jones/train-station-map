@@ -1,7 +1,8 @@
 import React, { ReactNode, Suspense } from "react";
 import PageContext from "../../../contexts/page";
 import Loading from "../../Loading";
-import "./PageLayout.scss";
+import Header from "../Header/Header";
+import "./MapPageLayout.scss";
 
 const Map = React.lazy(() => import("../../Map"));
 
@@ -15,6 +16,7 @@ interface Props {
 export default function PageLayout(props: Props) {
 	return (
 		<PageContext.Provider value={props.page}>
+			<Header title={props.title} subtitle={props.subtitle} />
 			<div className="page-container">
 				{props.children}
 				{props.mapReady && (

@@ -5,11 +5,12 @@ import {
 	DEFAULT_REDUCER,
 	INITIAL_STATE,
 	TRAIN_STATIONS_LOADED,
-} from "../../store";
-import StoreContext from "../../contexts/store";
+} from "../../../store";
+import StoreContext from "../../../contexts/store";
 import Trains from ".";
-import { formatTrainStations } from "../../utils/formatters";
-import { fetchStations } from "../../utils/http";
+import { formatTrainStations } from "../../../utils/formatters";
+import { fetchStations } from "../../../utils/http";
+import { BrowserRouter } from "react-router-dom";
 
 const records = [
 	{
@@ -24,7 +25,7 @@ const records = [
 		},
 	},
 ];
-jest.mock("../utils/http");
+jest.mock("../../utils/http");
 
 const observe = jest.fn();
 const unobserve = jest.fn();
@@ -49,7 +50,9 @@ describe("TrainsComponent", () => {
 
 		const { queryByText } = render(
 			<StoreContext.Provider value={{ state, dispatch }}>
-				<Trains />
+				<BrowserRouter>
+					<Trains />
+				</BrowserRouter>
 			</StoreContext.Provider>
 		);
 		expect(queryByText("123 Main St")).toBeNull();

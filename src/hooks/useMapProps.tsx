@@ -1,6 +1,6 @@
-import useStore from "./useStore";
 import { useMemo } from "react";
 import usePage from "./usePage";
+import { useSelector } from "react-redux";
 
 export interface ICoordinates {
 	lat: number;
@@ -25,10 +25,8 @@ interface Props {
 }
 
 export default function useMapProps() {
-	const { state } = useStore();
+	const { trains, buses } = useSelector((store: any) => store.mapExamples);
 	const page = usePage();
-
-	const { trains, buses } = state;
 
 	return useMemo(() => {
 		const { origin, stops, destination } = buses.currentRoute;

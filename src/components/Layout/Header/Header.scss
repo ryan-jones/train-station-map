@@ -1,7 +1,8 @@
 @import "../../../styles/global.scss";
 
 .header {
-	@include w-h(100%, calc(60vh + 50px));
+	@include w-h(100%, 50vh);
+	margin: 50px 0 0;
 
 	&__banner {
 		height: 100%;
@@ -17,9 +18,9 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	height: calc(60vh + 50px);
+	height: calc(50vh);
 	width: 100%;
-	margin: 0;
+	margin: 50px 0 0;
 	padding: 0;
 	display: flex;
 	justify-content: center;
@@ -39,7 +40,7 @@
 		text-transform: uppercase;
 		text-align: center;
 		font-family: $title-text;
-		font-size: 64px;
+		font-size: 55px;
 		width: 55%;
 		margin: 15px auto 36px;
 	}

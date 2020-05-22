@@ -1,15 +1,19 @@
 @import "../../../styles/global.scss";
 .menu {
 	@include w-h(100%, 50px);
-	position: absolute;
+	position: fixed;
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	align-items: center;
 	z-index: 100;
+	top: 0;
 	background-color: $text-dark;
-}
-a {
-	text-decoration: none;
-	font-family: $title-text;
 	color: $white;
+}
+
+.nav-btns {
+	width: 50%;
+	display: flex;
+	align-content: center;
+	justify-content: space-evenly;
 }

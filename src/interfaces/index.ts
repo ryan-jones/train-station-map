@@ -1,5 +1,6 @@
 export interface IState {
-	contentType: string;
+	navDrawerOpen: boolean;
+	settings: any;
 	buses: {
 		error: boolean;
 		routes: IListValue[];
@@ -11,6 +12,11 @@ export interface IState {
 		selectedStation: IListValue;
 	};
 }
+
+// export interface ISettings {
+// 	useDarkTheme: boolean;
+// 	useLarger
+// }
 
 export interface IListValue {
 	name: string;

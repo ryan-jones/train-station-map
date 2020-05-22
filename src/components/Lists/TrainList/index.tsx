@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import useStore from "../../../hooks/useStore";
-import { fetchStations } from "../../../utils/http";
-import { formatTrainStations } from "../../../utils/formatters";
-import { LOAD_MORE_TRAIN_STATIONS, SELECT_TRAIN_STATION } from "../../../store";
 import TrainListItem from "./TrainListItem";
 import { IListValue } from "../../../interfaces";
 import List from "../index";
 import Loading from "../../Loading";
+import { useDispatch } from "react-redux";
+import {
+	loadMoreTrainStations,
+	selectTrainStation,
+} from "../../../store/actions/mapExamples";
 
 interface Props {
 	stations: IListValue[];
@@ -16,19 +17,14 @@ let observer: any;
 let loadOn: any;
 
 export default function TrainList({ stations, listError }: Props) {
-	const { dispatch } = useStore();
+	const dispatch = useDispatch();
 	const stationQty = stations.length;
 
 	useEffect(() => {
 		const onIntersection = async (entries: any) => {
 			if (entries[0].isIntersecting) {
 				try {
-					const { records } = await fetchStations(stationQty);
-					const newStations = formatTrainStations(records);
-					dispatch({
-						type: LOAD_MORE_TRAIN_STATIONS,
-						payload: newStations,
-					});
+					await dispatch(loadMoreTrainStations(stationQty));
 					observer.unobserve(loadOn);
 				} catch (err) {
 					console.log(err);
@@ -52,9 +48,7 @@ export default function TrainList({ stations, listError }: Props) {
 					<TrainListItem
 						key={`${station.name}-${i}`}
 						station={station}
-						selectStation={() =>
-							dispatch({ type: SELECT_TRAIN_STATION, payload: station })
-						}
+						selectStation={() => dispatch(selectTrainStation(station))}
 					/>
 				))
 			) : (

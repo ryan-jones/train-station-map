@@ -1,8 +1,8 @@
 import React from "react";
-import useStore from "../../../../hooks/useStore";
 import { setStatusIndicator } from "../../../../utils";
-import { SELECT_BUS_ROUTE } from "../../../../store";
 import { IListValue } from "../../../../interfaces";
+import { useDispatch, useSelector } from "react-redux";
+import { selectBusRoute } from "../../../../store/actions/mapExamples";
 import "./ListItem.scss";
 
 interface Props {
@@ -10,9 +10,10 @@ interface Props {
 }
 
 export default function ListItem({ result }: Props) {
-	const { state, dispatch } = useStore();
+	const dispatch = useDispatch();
+	const { buses } = useSelector((state: any) => state.mapExamples);
 
-	const isSelectedRoute = state.buses.currentRoute.name === result.name;
+	const isSelectedRoute = buses.currentRoute.name === result.name;
 	const itemClass = isSelectedRoute ? "item-selected" : "item";
 
 	return (
@@ -21,7 +22,7 @@ export default function ListItem({ result }: Props) {
 			className={itemClass}
 			onClick={() => {
 				if (!isSelectedRoute) {
-					dispatch({ type: SELECT_BUS_ROUTE, payload: result });
+					dispatch(selectBusRoute(result));
 				}
 			}}
 		>
