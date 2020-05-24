@@ -2,7 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import List from "@material-ui/core/List";
+import ListSubheader from "@material-ui/core/ListSubheader";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSettings } from "../../../store/actions/settings";
@@ -17,9 +18,9 @@ const useStyles = makeStyles({
 });
 
 export default function Languages() {
-	const classes = useStyles();
 	const dispatch = useDispatch();
 	const { language } = useSelector((state: any) => state.settings);
+	const classes = useStyles();
 
 	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
 		dispatch(updateSettings("language", event.target.value));
@@ -27,22 +28,30 @@ export default function Languages() {
 
 	return (
 		<>
-			<ListItem>
-				<ListItemText primary="Select Language" />
-			</ListItem>
-			<FormControl className={classes.formControl} variant="outlined">
-				<NativeSelect
-					className={classes.select}
-					value={language}
-					onChange={handleChange}
-					name="language"
-					inputProps={{ "aria-label": "language" }}
-				>
-					<option value="en">English</option>
-					<option value="es">Español</option>
-					<option value="zh">中文</option>
-				</NativeSelect>
-			</FormControl>
+			<List
+				aria-labelledby="nested-list-subheader"
+				subheader={
+					<ListSubheader component="div" id="nested-list-subheader">
+						Select Language
+					</ListSubheader>
+				}
+			>
+				{/* <ListItem> */}
+				<FormControl className={classes.formControl} variant="outlined">
+					<NativeSelect
+						className={classes.select}
+						value={language}
+						onChange={handleChange}
+						name="language"
+						inputProps={{ "aria-label": "language" }}
+					>
+						<option value="en">English</option>
+						<option value="es">Español</option>
+						<option value="zh">中文</option>
+					</NativeSelect>
+				</FormControl>
+				{/* </ListItem> */}
+			</List>
 		</>
 	);
 }

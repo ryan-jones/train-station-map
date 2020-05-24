@@ -20,3 +20,9 @@ $selected-item: lighten(
 	$color: gray,
 	$amount: 40,
 );
+
+$background-dark: $text-dark;
+$text-color-dark: $white;
+
+$background-light: $white;
+$text-color-light: $text-dark;

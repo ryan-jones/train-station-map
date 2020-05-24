@@ -9,7 +9,7 @@ interface Props {
 
 export default function Header(props: Props) {
 	return (
-		<header className="header">
+		<div className="header">
 			<div className="header__banner">
 				<img className="header__img" src={Image} alt="header" />
 				<div className="overlay">
@@ -21,6 +21,6 @@ export default function Header(props: Props) {
 					</div>
 				</div>
 			</div>
-		</header>
+		</div>
 	);
 }

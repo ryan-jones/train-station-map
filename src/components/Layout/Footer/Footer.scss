@@ -4,16 +4,23 @@
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-	background-color: $text-dark;
-	color: $white;
 
-	&-extended {
-		height: 50vh;
-		display: flex;
-		justify-content: space-evenly;
-		align-items: center;
+	&.dark {
 		background-color: $text-dark;
 		color: $white;
+
+		a {
+			color: $white;
+		}
+	}
+
+	&.light {
+		background-color: $white;
+		color: $text-dark;
+
+		a {
+			color: $text-dark;
+		}
 	}
 
 	a {

@@ -1,7 +1,7 @@
 import React from "react";
 import FormGroup from "@material-ui/core/FormGroup";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import List from "@material-ui/core/List";
+import ListSubheader from "@material-ui/core/ListSubheader";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,21 +27,27 @@ export default function ThemesOptions() {
 
 	return (
 		<>
-			<ListItem>
-				<ListItemText primary="Manage Theme" />
-			</ListItem>
-			<FormGroup className={classes.root}>
-				<FormControlLabel
-					control={
-						<Switch
-							checked={useDarkTheme}
-							onChange={handleChange}
-							name="useDarkTheme"
-						/>
-					}
-					label="Use Dark Theme"
-				/>
-			</FormGroup>
+			<List
+				aria-labelledby="nested-list-subheader"
+				subheader={
+					<ListSubheader component="div" id="nested-list-subheader">
+						Select theme
+					</ListSubheader>
+				}
+			>
+				<FormGroup className={classes.root}>
+					<FormControlLabel
+						control={
+							<Switch
+								checked={useDarkTheme}
+								onChange={handleChange}
+								name="useDarkTheme"
+							/>
+						}
+						label="Use Dark Theme"
+					/>
+				</FormGroup>
+			</List>
 		</>
 	);
 }

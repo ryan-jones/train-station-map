@@ -19,16 +19,16 @@ export default function HomePage() {
 				</div>
 				<div className="btn-group">
 					<Button
-						variant="contained"
 						color="primary"
+						variant="contained"
 						component={Link}
 						to="/trains"
 					>
 						Search for trains
 					</Button>
 					<Button
-						variant="contained"
 						color="primary"
+						variant="contained"
 						component={Link}
 						to="/buses"
 					>
